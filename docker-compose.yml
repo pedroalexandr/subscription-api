@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+  subscription-service:
+    container_name: subscription-service
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+  email-service:
+    container_name: email-service
+    image: mailhog/mailhog
+    logging:
+      driver: 'none'
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - app-network
+networks:
+  app-network:
+      driver: bridge
