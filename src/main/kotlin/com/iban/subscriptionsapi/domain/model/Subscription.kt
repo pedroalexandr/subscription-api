@@ -1,6 +1,5 @@
 package com.iban.subscriptionsapi.domain.model
 
-import java.util.UUID
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
@@ -14,5 +13,5 @@ data class Subscription(
     val gender: String = "",
     val dateOfBirth: String,
     val optIn: Boolean,
-    val newsletterID: Long,
+    val newsletterId: Long,
 )
