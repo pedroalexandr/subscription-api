@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/subscriptions")
+@RequestMapping("/api/v1/subscriptions")
 class SubscriptionController(
     private val subscriptionRepository: SubscriptionRepository,
     private val emailService: EmailServiceImpl
