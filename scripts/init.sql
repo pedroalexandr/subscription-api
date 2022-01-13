@@ -1,0 +1,1 @@
+create database subscriptions_api;
