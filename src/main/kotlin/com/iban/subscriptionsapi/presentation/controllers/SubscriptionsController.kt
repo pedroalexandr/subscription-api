@@ -1,24 +1,24 @@
 package com.iban.subscriptionsapi.presentation.controllers
 
-import com.iban.subscriptionsapi.domain.model.Subscription
-import com.iban.subscriptionsapi.infrastructure.db.SubscriptionRepository
-import com.iban.subscriptionsapi.infrastructure.services.EmailServiceImpl
+import com.iban.subscriptionsapi.domain.models.Subscription
+import com.iban.subscriptionsapi.domain.usecases.SubscriptionCreation
+import com.iban.subscriptionsapi.domain.usecases.TransactionalEmailSending
+import com.iban.subscriptionsapi.helpers.EmailMessageFactory
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/v1/subscriptions")
 class SubscriptionsController(
-    private val subscriptionRepository: SubscriptionRepository,
-    private val emailService: EmailServiceImpl
+    private val subscriptionCreation: SubscriptionCreation,
+    private val transactionalEmailSending: TransactionalEmailSending
 ) {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@RequestBody subscription: Subscription): Subscription {
-        val createdSubscription = subscriptionRepository.save(subscription)
-
-        emailService.sendSimpleMessage(createdSubscription.email, "Subscription confirmation", "Confirmed")
-
+        val createdSubscription = subscriptionCreation.create(subscription)
+        val emailMessage = EmailMessageFactory().create(createdSubscription.email)
+        transactionalEmailSending.send(emailMessage)
         return createdSubscription
     }
 }
