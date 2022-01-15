@@ -1,6 +1,13 @@
 package com.iban.subscriptionsapi.infrastructure.db
 
-import com.iban.subscriptionsapi.domain.model.Subscription
-import org.springframework.data.jpa.repository.JpaRepository
+import com.iban.subscriptionsapi.application.protocols.SubscriptionCreationRepository
+import com.iban.subscriptionsapi.domain.models.Subscription
+import org.springframework.stereotype.Component
 
-interface SubscriptionRepository : JpaRepository<Subscription, Long> {}
+@Component
+class SubscriptionRepository(private val subscriptionJpaRepository: SubscriptionJpaRepository) :
+    SubscriptionCreationRepository {
+    override fun save(subscription: Subscription): Subscription {
+        return subscriptionJpaRepository.save(subscription)
+    }
+}
