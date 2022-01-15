@@ -2,9 +2,10 @@ version: "3.7"
 
 networks:
   db-network:
-  mail-network:
+  smtp-server-network:
   app-network:
   public-network:
+  queue-network:
 
 services:
   public-service:
@@ -26,11 +27,14 @@ services:
     networks:
       - public-network
       - app-network
-      - mail-network
+      - smtp-server-network
       - db-network
+      - queue-network
     depends_on:
       - db-service
-      - email-service
+      - smtp-server
+      - email-service-worker
+      - queue-service
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db-service:5432/subscriptions_api
       - SPRING_DATASOURCE_USERNAME=postgres
@@ -48,12 +52,33 @@ services:
     networks:
       - db-network
 
-  email-service:
-    container_name: email-service
+  smtp-server:
+    container_name: smtp-server
     image: mailhog/mailhog
     logging:
       driver: 'none'
     ports:
-      - "8025:8025" # Exposed just to check the emails via Mailhog's UI
+      - "8025:8025"
     networks:
-      - mail-network
+      - smtp-server-network
+
+  email-service-worker:
+    build:
+      context: email-service
+    volumes:
+      - ./email-service:/email-service
+    working_dir: /email-service
+    command:
+      - email-service.py
+    networks:
+      - queue-network
+      - smtp-server-network
+    depends_on:
+      - smtp-server
+      - queue-service
+
+  queue-service:
+    container_name: queue-service
+    image: redis:3.2
+    networks:
+      - queue-network
