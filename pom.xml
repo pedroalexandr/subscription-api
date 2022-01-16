@@ -12,7 +12,7 @@
 	<artifactId>subscriptions-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>subscriptions-api</name>
-	<description>API for handling Iban&apos;s subscription business model</description>
+	<description>API for handling subscriptions</description>
 	<properties>
 		<java.version>11</java.version>
 		<kotlin.version>1.6.10</kotlin.version>
@@ -29,6 +29,10 @@
 			<version>1.0.2</version>
 		</dependency>
 		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
@@ -40,10 +44,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>redis.clients</groupId>
