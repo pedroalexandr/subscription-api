@@ -6,6 +6,7 @@ import com.iban.subscriptionsapi.domain.usecases.TransactionalEmailSending
 import com.iban.subscriptionsapi.helpers.EmailMessageFactory
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/api/v1/subscriptions")
@@ -15,7 +16,7 @@ class SubscriptionsController(
 ) {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody subscription: Subscription): Subscription {
+    fun create(@Valid @RequestBody subscription: Subscription): Subscription {
         val createdSubscription = subscriptionCreation.create(subscription)
         val emailMessage = EmailMessageFactory().create(createdSubscription.email)
         transactionalEmailSending.send(emailMessage)
