@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 class TransactionalSubscriptionEmailSending(private val queueMessagePublisher: QueueMessagePublisher) :
     TransactionalEmailSending {
     override fun send(emailMessage: EmailMessage): Void? {
-        queueMessagePublisher.publish(emailMessage)
+        queueMessagePublisher.publish("transactional-emails", emailMessage)
         return null
     }
 }
