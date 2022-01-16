@@ -1,5 +1,5 @@
 package com.iban.subscriptionsapi.application.protocols
 
 interface QueueMessagePublisher {
-    fun publish(message: Any): Void?
+    fun publish(key: String, message: Any): Void?
 }
