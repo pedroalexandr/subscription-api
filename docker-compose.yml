@@ -68,6 +68,9 @@ services:
     volumes:
       - ./email-service:/email-service
     working_dir: /email-service
+    environment:
+      - REDIS_HOST=queue-service
+      - SMTP_SERVER_HOST=smtp-server
     command:
       - email-service.py
     networks:
