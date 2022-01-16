@@ -2,7 +2,7 @@
 
 ## Reading guidance
 
-- `{api_domain}`: change it for the actual public domain you are acessing the API
+- `{api_domain}`: change it for the actual public domain you are accessing the API
 - `{amount_of_workers}`: change it for the amount of workers you want to use (e.g. 3)
 
 ## Pre-requisites
@@ -56,7 +56,11 @@ Used to create RESTful applications more easily and have the heavy-lifting taken
 
 ### JavaFaker dependency
 
-Used mostly in helper functions and tests to help generating random fake data
+Used mostly in helper functions and tests to help generate random fake data
+
+### Gson dependency
+
+Used to convert the email message object into a JSON string to be published to the queue
 
 ### Actuator dependency
 
@@ -66,9 +70,9 @@ Used to have endpoints to check the API health, metrics, sessions etc.
 
 Used to validate the domain models and all entities/components that need field or group-specific validation.
 
-### Spring Data Redis + Jedis dependencies
+### Jedis 3.6.2 dependency
 
-Used to configure the connection to the Redis queue service and turn the API into a publisher by providing helper methods to publish messages.
+Used as a Redis client to publish messages more easily on the Redis queue service
 
 ### PostgreSQL dependency
 
@@ -90,7 +94,7 @@ Used as the relational database for storing the subscriptions
 
 ### Mailhog for SMTP
 
-Used as a fake local SMTP server that provides an UI to verify the email messages
+Used as a fake local SMTP server that provides a UI to verify the email messages
 
 ### Nginx 1.13
 
@@ -98,4 +102,4 @@ Used with the sole purpose of being a reverse proxy for the API. It is reliable,
 
 ### Redis 3.2
 
-Used to serve as a pub/sub queue between the application itself and the email service.
+Used to serve as a queue that stores the produced email messages which are consumed by the email service
