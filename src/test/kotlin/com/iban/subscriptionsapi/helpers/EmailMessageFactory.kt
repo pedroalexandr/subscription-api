@@ -1,10 +1,10 @@
 package com.iban.subscriptionsapi.helpers
 
 import com.github.javafaker.Faker
-import com.iban.subscriptionsapi.domain.models.EmailMessage
+import com.iban.subscriptionsapi.domain.data.EmailMessage
 
 class EmailMessageFactory {
-    fun create(email: String): EmailMessage {
+    fun make(email: String): EmailMessage {
         val faker = Faker()
         return EmailMessage(
             content = faker.lorem().sentence(),
