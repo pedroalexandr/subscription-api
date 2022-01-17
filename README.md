@@ -20,11 +20,11 @@ In the project root folder, run:
 
 ### Windows
 
-`mvnw.cmd test -q`
+`mvnw.cmd test`
 
 ### Linux
 
-`./mvnw test -q`
+`./mvnw test`
 
 ## OPTIONAL: Build and run the solution scaling the email service
 
