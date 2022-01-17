@@ -14,6 +14,18 @@
 
 `$ docker-compose up -d`
 
+## Run all tests
+
+In the project root folder, run:
+
+### Windows
+
+`mvnw.cmd test -q`
+
+### Linux
+
+`./mvnw test -q`
+
 ## OPTIONAL: Build and run the solution scaling the email service
 
 `$ docker-compose up -d --scale email-service-worker={amount_of_workers}`
