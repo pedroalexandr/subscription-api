@@ -1,4 +1,4 @@
-package com.iban.subscriptionsapi.domain.models
+package com.iban.subscriptionsapi.domain.data
 
 data class EmailMessage(
     val content: String,
